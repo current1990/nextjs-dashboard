@@ -9,6 +9,28 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+export async function fetchInvoiceCount() {
+  try {
+    const data = await sql`SELECT COUNT(*) FROM invoices`;
+
+    return Number(data.rows[0].count);
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoice count.');
+  }
+}
+
+export async function fetchCustomerCount() {
+  try {
+    const data = await sql`SELECT COUNT(*) FROM customers`;
+
+    return Number(data.rows[0].count);
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch customer count.');
+  }
+}
+
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
